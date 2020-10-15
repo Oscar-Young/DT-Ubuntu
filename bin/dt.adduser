@@ -1,0 +1,38 @@
+#!/bin/bash
+WEB_URL=192.168.10.254:8888
+
+# build ds01
+nc -w 2 -z ds01 22
+[ "$?" != "0" ] && echo "ds01 not found" && exit;
+ssh ds01 "wget -qO - $WEB_URL/script/sysinfo | bash"
+ssh ds01 "wget -qO - $WEB_URL/script/sysprep | bash"
+ssh ds01 "wget -qO - $WEB_URL/script/build | bash"
+
+# Create User on gw
+echo "--- gw ---"
+for user in user01 user02 user03 user04 user05 user06 user07 user08 user09 user10 
+do
+  # Check user
+  id -u $user &>/dev/null
+  [ "$?" == 0 ] && echo "$user already exists" && continue
+  sudo useradd -m -s /bin/bash $user &>/dev/null && echo $user:$user |sudo chpasswd &>/dev/null && echo "Create $user"
+  echo "sshpass -p'$user' ssh $user@ds01 && exit" | sudo tee -a /home/$user/.bashrc &> /dev/null
+done
+
+# Create User on ds01
+echo "---ds01---"
+for user in user01 user02 user03 user04 user05 user06 user07 user08 user09 user10 
+do
+  # Check user
+  ssh ds01 "id -u $user &>/dev/null"
+  [ "$?" == 0 ] && echo "$user already exists" && continue
+  ssh ds01 "sudo adduser $user -s /bin/bash -D /home/$user && echo $user:$user |sudo chpasswd &>/dev/null" && echo "Create $user"
+  ssh ds01 "sudo mkdir -p /home/$user/.ssh && sudo cp -r /home/bigred/.ssh/environment /home/$user/.ssh/environment &>/dev/null"
+done
+
+# Create hdfs home on mas01
+echo "---hdfs---"
+for user in user01 user02 user03 user04 user05 user06 user07 user08 user09 user10
+do
+  ssh mas01 "hdfs dfs -mkdir -p /user/$user && hdfs dfs -chown $user:bigboss /user/$user && hdfs dfs -chmod 770 /user/$user"  
+done
