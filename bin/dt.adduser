@@ -36,3 +36,5 @@ for user in user01 user02 user03 user04 user05 user06 user07 user08 user09 user1
 do
   ssh mas01 "hdfs dfs -mkdir -p /user/$user && hdfs dfs -chown $user:bigboss /user/$user && hdfs dfs -chmod 770 /user/$user"  
 done
+
+ssh mas01 "hdfs dfs -chmod -R 777 /tmp"
