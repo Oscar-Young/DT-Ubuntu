@@ -1,12 +1,12 @@
 #!/bin/bash
-WEB_URL=192.168.10.254:8888
+[ -f $DT_HOME/conf/dt-env.sh ] && source $DT_HOME/conf/dt-env.sh && echo 'Loading DT environment...OK'
 
 # build ds01
 nc -w 2 -z ds01 22
 [ "$?" != "0" ] && echo "ds01 not found" && exit;
-ssh ds01 "wget -qO - $WEB_URL/script/sysinfo | bash"
-ssh ds01 "wget -qO - $WEB_URL/script/sysprep | bash"
-ssh ds01 "wget -qO - $WEB_URL/script/build | bash"
+# ssh ds01 "wget -qO - $WEB_URL/script/sysinfo | bash"
+# ssh ds01 "wget -qO - $WEB_URL/script/sysprep | bash"
+# ssh ds01 "wget -qO - $WEB_URL/script/build | bash"
 
 # Create User on gw
 echo "--- gw ---"
@@ -27,14 +27,22 @@ do
   ssh ds01 "id -u $user &>/dev/null"
   [ "$?" == 0 ] && echo "$user already exists" && continue
   ssh ds01 "sudo adduser $user -s /bin/bash -D /home/$user && echo $user:$user |sudo chpasswd &>/dev/null" && echo "Create $user"
-  ssh ds01 "sudo mkdir -p /home/$user/.ssh && sudo cp -r /home/bigred/.ssh/environment /home/$user/.ssh/environment && schematool -dbType derby -initSchema &>/dev/null"
+  ssh ds01 "sudo mkdir -p /home/$user/.ssh && sudo cp -r /home/bigred/.ssh/environment /home/$user/.ssh/environment"
 done
 
 # Create hdfs home on mas01
-echo "---hdfs---"
+# echo "---hdfs---"
+# for user in user01 user02 user03 user04 user05 user06 user07 user08 user09 user10 user11 user12 user13 user14 user15 user16 user17 user18 user19 user20 
+# do
+#   ssh mas01 "hdfs dfs -mkdir -p /user/$user && hdfs dfs -chown $user:bigboss /user/$user && hdfs dfs -chmod 770 /user/$user" &>/dev/null  && echo "Create $user HDFS home...OK" 
+# done
+
+# Hive reset db
 for user in user01 user02 user03 user04 user05 user06 user07 user08 user09 user10 user11 user12 user13 user14 user15 user16 user17 user18 user19 user20 
 do
-  ssh mas01 "hdfs dfs -mkdir -p /user/$user && hdfs dfs -chown $user:bigboss /user/$user && hdfs dfs -chmod 770 /user/$user"  
+  # sshpass -p $user ssh $user@ds01 "schematool -dbType derby -initSchema"  && echo "Init $user derby...OK"
+  sshpass -p $user ssh $user@ds01 " wget -q $WEB_URL/config/.hiverc"  && echo "Add $user .hiverc...OK"
+
 done
 
 ssh mas01 "hdfs dfs -chmod -R 777 /tmp"

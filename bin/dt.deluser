@@ -16,7 +16,8 @@ for user in user01 user02 user03 user04 user05 user06 user07 user08 user09 user1
 do
   ssh ds01 "id -u $user &>/dev/null"
   [ "$?" != 0 ] && echo "$user...not found" && continue
-  ssh ds01 "sudo deluser $user &>/dev/null" && echo "$user...del"
+  ssh ds01 "sudo deluser $user &>/dev/null && sudo rm -r /home/$user" && echo "$user...del"
+
 done
 
 echo "---ds01---"
