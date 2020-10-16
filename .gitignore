@@ -3,3 +3,5 @@ web/stack/apache-tez-0.9.2-bin.tar.gz
 web/stack/pig-0.17.0.tar.gz
 web/stack/apache-hive-2.3.7-bin.tar.gz
 web/stack/dt.bash
+web/stack/tez-0.9.2-minimal.tar.gz
+web/stack/tez-0.9.2.tar.gz
