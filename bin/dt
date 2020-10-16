@@ -8,7 +8,7 @@ echo -e "CDT 20.08\n"
 c="sysinfo sysprep build list restart"
 [[ ! "${c}" =~ "$1" ]] && echo "Oops, wrong command" && exit 1
 
-i=$(cat /etc/hosts | grep -E "mas|wka" | tr '\t' ' ' | cut -d' ' -f1)
+i=$(cat /etc/hosts | grep -E "mas|wka|ds" | tr '\t' ' ' | cut -d' ' -f1)
 c=$1
 
 ps aux | grep -v grep | grep -o 'busybox httpd' &>/dev/null
@@ -40,7 +40,7 @@ build)
     [ ! -f "$DT_HOME/web/stack/hadoop-2.10.1.alpine.tar.gz" ] && echo "Hadoop Not found"
     [ ! -f "$DT_HOME/web/stack/pig-0.17.0.tar.gz" ] &&  echo "download Aapche pig-0.17.0..." && wget -q 'ftp://ftp.twaren.net/Unix/Web/apache/pig/pig-0.17.0/pig-0.17.0.tar.gz' -O $DT_HOME/web/stack/pig-0.17.0.tar.gz  
     [ ! -f "$DT_HOME/web/stack/apache-hive-2.3.7-bin.tar.gz" ] &&  echo "download Aapche hive-2.3.7..." && wget -q 'ftp://ftp.twaren.net/Unix/Web/apache/hive/hive-2.3.7/apache-hive-2.3.7-bin.tar.gz' -O $DT_HOME/web/stack/apache-hive-2.3.7-bin.tar.gz  
-    [ ! -f "$DT_HOME/web/stack/apache-tez-0.9.2-bin.tar.gz" ] &&  echo "download Aapche tez-0.9.2..." && wget -q 'ftp://ftp.twaren.net/Unix/Web/apache/tez/0.9.2/apache-tez-0.9.2-bin.tar.gz' -O $DT_HOME/web/stack/apache-tez-0.9.2-bin.tar.gz  
+    [ ! -f "$DT_HOME/web/stack/tez-0.9.2.tar.gz" ] &&  echo "download Aapche tez-0.9.2..." && wget -q 'ftp://ftp.twaren.net/Unix/Web/apache/tez/0.9.2/apache-tez-0.9.2-bin.tar.gz' -O $DT_HOME/web/stack/apache-tez-0.9.2-bin.tar.gz  
     ssh $x "wget -qO - $WEB_URL/script/build | bash /dev/stdin $WEB_URL"
   done
   ;;
