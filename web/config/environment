@@ -3,9 +3,9 @@ HADOOP_LOG_DIR=/tmp
 YARN_LOG_DIR=/tmp
 HADOOP_HOME=/opt/hadoop-2.10.1
 YARN_HOME=/opt/hadoop-2.10.1
-HBASE_CONF_DIR=/opt/dtx/hbase-1.4.13/conf
+HBASE_CONF_DIR=/opt/hbase-1.4.13/conf
 PIG_HEAPSIZE=512
-HIVE_HOME=/opt/dtx/apache-hive-2.3.7-bin
+HIVE_HOME=/opt/apache-hive-2.3.7-bin
 TEZ_HOME=/opt/apache-tez-0.9.2-bin
 TEZ_CONF_DIR=/opt/apache-tez-0.9.2-bin/conf
 HADOOP_OPTS=-Djava.library.path=/opt/hadoop-2.10.1/lib/native
