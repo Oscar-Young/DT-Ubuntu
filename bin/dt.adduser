@@ -31,11 +31,11 @@ do
 done
 
 # Create hdfs home on mas01
-# echo "---hdfs---"
-# for user in user01 user02 user03 user04 user05 user06 user07 user08 user09 user10 user11 user12 user13 user14 user15 user16 user17 user18 user19 user20 
-# do
-#   ssh mas01 "hdfs dfs -mkdir -p /user/$user && hdfs dfs -chown $user:bigboss /user/$user && hdfs dfs -chmod 770 /user/$user" &>/dev/null  && echo "Create $user HDFS home...OK" 
-# done
+echo "---hdfs---"
+for user in user01 user02 user03 user04 user05 user06 user07 user08 user09 user10 user11 user12 user13 user14 user15 user16 user17 user18 user19 user20 
+do
+  ssh mas01 "hdfs dfs -mkdir -p /user/$user && hdfs dfs -chown $user:bigboss /user/$user && hdfs dfs -chmod 770 /user/$user" &>/dev/null  && echo "Create $user HDFS home...OK" 
+done
 
 # Hive reset db
 for user in user01 user02 user03 user04 user05 user06 user07 user08 user09 user10 user11 user12 user13 user14 user15 user16 user17 user18 user19 user20 

@@ -3,7 +3,7 @@ echo "[`hostname`]"
 
 # Install Hadoop
 [ -d "/opt/hadoop-2.10.1" ] && echo "Hadoop is already exists"
-[ ! -d "/opt/hadoop-2.10.1" ] && echo -n "Install Hadoop..." && wget -qO - "$WEB_URL/stack/hadoop-2.10.1.alpine.tar.gz" | sudo tar -zxvf - -C /opt &>/dev/null  && echo "OK"
+[ ! -d "/opt/hadoop-2.10.1" ] && echo -n "Install Hadoop..." && wget -qO - "$WEB_URL/stack/hadoop-2.10.1.tar.gz" | sudo tar -zxvf - -C /opt &>/dev/null  && echo "OK"
 # Install Pig
 [ -d "/opt/pig-0.17.0" ] && echo "Pig is already exists" 
 [ ! -d "/opt/pig-0.17.0" ] && echo -n "Install Pig..." && wget -qO - "$WEB_URL/stack/pig-0.17.0.tar.gz" | sudo tar -zxvf - -C /opt &>/dev/null  && echo "OK"
