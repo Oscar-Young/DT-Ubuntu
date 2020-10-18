@@ -11,6 +11,7 @@ TEZ_CONF_DIR=/opt/apache-tez-0.9.2-bin/conf
 HADOOP_OPTS=-Djava.library.path=/opt/hadoop-2.10.1/lib/native
 HADOOP_COMMON_LIB_NATIVE_DIR=/opt/hadoop-2.10.1/lib/native
 HADOOP_YARN_HOME=/opt/hadoop-2.10.1
+HADOOP_MAPRED_LOG_DIR=/tmp
 HADOOP_CLASSPATH=/opt/apache-tez-0.9.2-bin/conf:/opt/apache-tez-0.9.2-bin/*:/opt/apache-tez-0.9.2-bin/lib/*
 PIG_CLASSPATH=HADOOP_CLASSPATH=/opt/apache-tez-0.9.2-bin/conf:/opt/apache-tez-0.9.2-bin/*:/opt/apache-tez-0.9.2-bin/lib/*
 JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk
