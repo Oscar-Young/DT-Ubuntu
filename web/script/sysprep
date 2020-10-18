@@ -1,6 +1,13 @@
 echo "[`hostname`]"
 
-# Repositories
+[ "$(cat /etc/os-release | grep ubuntu)" != "" ] && os='ubuntu'
+[ "$(cat /etc/os-release | grep alpine)" != "" ] && os='alpine'
+
+echo $os
+exit
+case $os in
+alpine)
+# Repositories  
 sudo cat << EOF | sudo tee /etc/apk/repositories > /dev/null 
 http://dl-cdn.alpinelinux.org/alpine/v$(cat /etc/alpine-release | cut -d'.' -f1,2)/main
 http://dl-cdn.alpinelinux.org/alpine/v$(cat /etc/alpine-release | cut -d'.' -f1,2)/community
@@ -19,3 +26,18 @@ sudo sed -i 's/^export PATH/#&/' /etc/profile  && \
 sudo sed -i '/PermitUserEnvironment/c\PermitUserEnvironment yes' /etc/ssh/sshd_config
 sudo /etc/init.d/sshd restart &> /dev/null
 [ "$?" == "0" ] && echo "Setting SSH environment ok"
+;;
+ubuntu)
+  sudo apt update && sudo apt install openjdk-8-jdk
+  [ "$?" == "0" ] && echo "Install openjdk-1.8-jdk ok" 
+  sudo rm -rf /var/cache/apt/* &>/dev/null
+
+  # SSH config setting
+  sudo sed -i 's/^export PATH/#&/' /etc/profile  && \
+  sudo sed -i '/PermitUserEnvironment/c\PermitUserEnvironment yes' /etc/ssh/sshd_config
+  sudo /etc/init.d/sshd restart &> /dev/null
+  [ "$?" == "0" ] && echo "Setting SSH environment ok" 
+;;
+*)
+  echo 'OS not support'
+esac
