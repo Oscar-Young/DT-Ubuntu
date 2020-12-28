@@ -14,7 +14,7 @@
    </property>
    <property>
       <name>hadoop.user.group.static.mapping.overrides</name>
-      <value>bigred=bigboss;rbean=soup;gbean=soup,rice;ybean=rice</value>
+      <value>kuan=bigboss;rbean=soup;gbean=soup,rice;ybean=rice</value>
    </property>
    <!--
  <property>
@@ -31,11 +31,11 @@
  </property>
  -->
    <property>
-      <name>hadoop.proxyuser.bigred.groups</name>
+      <name>hadoop.proxyuser.kuan.groups</name>
       <value>*</value>
    </property>
    <property>
-      <name>hadoop.proxyuser.bigred.hosts</name>
+      <name>hadoop.proxyuser.kuan.hosts</name>
       <value>*</value>
    </property>
 </configuration>

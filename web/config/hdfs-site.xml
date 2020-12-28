@@ -6,11 +6,11 @@ href="configuration.xsl"?> <configuration>
   </property>
   <property>
     <name>dfs.namenode.name.dir</name>
-    <value>file:/home/bigred/nn</value>
+    <value>file:/home/kuan/nn</value>
   </property>
   <property>
     <name>dfs.datanode.data.dir</name>
-    <value>file:/home/bigred/dn</value>
+    <value>file:/home/kuan/dn</value>
   </property>
   <property>
     <name>dfs.permissions.superusergroup</name>

@@ -4,7 +4,7 @@ echo "[`hostname`]"
 [ "$(cat /etc/os-release | grep alpine)" != "" ] && os='alpine'
 
 echo $os
-exit
+
 case $os in
 alpine)
 # Repositories  
@@ -35,7 +35,7 @@ ubuntu)
   # SSH config setting
   sudo sed -i 's/^export PATH/#&/' /etc/profile  && \
   sudo sed -i '/PermitUserEnvironment/c\PermitUserEnvironment yes' /etc/ssh/sshd_config
-  sudo /etc/init.d/sshd restart &> /dev/null
+  sudo /etc/init.d/ssh restart &> /dev/null
   [ "$?" == "0" ] && echo "Setting SSH environment ok" 
 ;;
 *)
